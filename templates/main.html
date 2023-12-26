@@ -1,0 +1,13 @@
+{% load static %}
+{% block main %}
+<main>
+<div class="container">
+    <div class='card'>
+        <h1>Feliz Año Nuevo</h1>
+        <img src="{% static 'img/mesa.jpg' %}" alt="mesa">
+        <a href="{% url 'listadoReservas' %}">Reservas</a>
+    </div>
+</div>
+</main>
+
+{% endblock  %}

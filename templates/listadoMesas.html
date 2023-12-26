@@ -1,0 +1,41 @@
+{% extends "index.html" %}
+
+{% block main %}
+    <div class="container">
+        {% if mesas %}
+            <table class="table" id="datatable-products">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Numero de Mesa</th>
+                        <th>Capacidad de Personas</th>
+                        <th>Opciones</th>
+                    </tr>
+                    
+                </thead>
+                <tbody id="datatable-products">
+                    {% for m in mesas %}
+                    <tr>
+                        <td>{{m.id}}</td>
+                        <td>{{m.numero}}</td>
+                        <td>{{m.capacidad_personas}}</td>
+                        <td><a href="{% url 'modificarMesa' m.id %}" class='btn btn-success'><i class='bx bx-edit' style='color:#fdf6f6' ></i></a>
+                            <form style="display:inline;" method="POST" action="{% url 'eliminarMesa' m.id %}" onsubmit="return confirm('¿Estás seguro de que quieres eliminar la Mesa con ID : '+{{m.id}}+ '?');">
+                                {% csrf_token %}
+                                <button type="submit" class='btn btn-danger'><i class='bx bxs-trash' style='color:#fdf6f6' ></i></button>
+                            </form>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+                <div class="alert alert-danger" role="alert">
+                No existen Mesas
+                </div>
+            {% endif %}
+    </div>
+{% endblock  %}
+
+{% block footer %}
+{% endblock  %}

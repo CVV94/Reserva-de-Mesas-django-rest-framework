@@ -1,0 +1,51 @@
+{% extends "index.html" %}
+
+{% block main %}
+<div class="container">
+    {% if mensaje %}
+    <div class="alert alert-success" role="alert">
+        La Mesa se registro Correctamente
+    </div>
+    {% endif %}
+    {% comment %} {% if form.errors %}
+    <div class="alert alert-danger" role="alert">
+        {% for field, errors in form.errors.items %}
+            {% for error in errors %}
+                <p>{{ field }}: {{ error }}</p>
+            {% endfor %}
+        {% endfor %}
+    </div>
+    {% endif %} {% endcomment %}
+
+    <form class="form" method='post'>
+        {% csrf_token %}
+
+        <p class="title">Registrar </p>
+        <p class="message">Bienvenido al registro de Mesas. </p>
+            <div class="flex">
+                <label>
+                    {{form.numero}}
+                    <span>Numero de Mesa</span>
+                </label>
+        
+                <label>
+                    {{form.capacidad_personas}}
+                    <span>Capacidad de Personal</span>
+                </label>
+            </div>  
+                
+        {% if editando %}
+        <button class="submit">Actualizar</button>
+        <a href="{% url 'listadoMesas' %}" class="submit">Cancelar</a>
+        {% else %}
+        <button class="submit">Registrar</button>
+        {% endif %}
+        <p class="signin">¿Desea Registrar una Reserva? <a href="{% url 'registrarReserva' %}">Reserva</a> </p>
+    </form>
+</div>
+{% endblock  %}
+
+
+{% block footer %}
+
+{% endblock  %}

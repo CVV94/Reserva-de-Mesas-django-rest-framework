@@ -1,0 +1,81 @@
+{% extends "index.html" %}
+
+{% block main %}
+<div class="container">
+    {% if mensaje %}
+    <div class="alert alert-success" role="alert">
+        La Reserva se registro Correctamente
+    </div>
+    {% endif %}
+    {% if form.errors %}
+    <div class="alert alert-danger" role="alert">
+        {% for field, errors in form.errors.items %}
+            {% for error in errors %}
+                <p>{{ field }}: {{ error }}</p>
+            {% endfor %}
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+    {% if form.cantidad_personas.errors %}
+    <div class="alert alert-danger">
+        {{ form.cantidad_personas.errors }}
+    </div>
+    {% endif %}
+    <form class="form" method='post'>
+        {% csrf_token %}
+
+        <p class="title">Registrar </p>
+        <p class="message">Bienvenido al registro de Reservas. </p>
+            <div class="flex">
+            <label>
+                {{form.nombre_persona}}
+                <span>Nombre</span>
+            </label>
+    
+            <label>
+                {{form.telefono}}
+                <span>Telefono</span>
+            </label>
+        </div>  
+                
+        <label>
+            {{form.fecha_reserva}}
+            <span>Fecha de Reserva</span>
+        </label> 
+            
+        <label>
+            {{form.hora_reserva}}
+            <span>Hora de Reserva</span>
+        </label>
+        <label>
+            {{form.cantidad_personas}}
+            <span>Cantidad de Personas</span>
+        </label>
+        <label>
+            {{form.estado}}
+            <span>Estado</span>
+        </label>
+        <label>
+            {{form.mesa_asignada}}
+            <span>Mesa Asignada</span>
+        </label>
+        <label>
+            {{form.observacion}}
+            <span>Observaciones</span>
+        </label>
+        {% if editando %}
+        <button class="submit">Actualizar</button>
+        <a href="{% url 'listadoReservas' %}" class="submit">Cancelar</a>
+        {% else %}
+        <button class="submit">Registrar</button>
+        {% endif %}
+        <p class="signin">¿Desea Registrar una Mesa? <a href="{% url 'registrarMesa' %}">Mesa</a> </p>
+    </form>
+</div>
+{% endblock  %}
+
+
+{% block footer %}
+
+{% endblock  %}

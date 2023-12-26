@@ -1,0 +1,41 @@
+{% load static %}
+{% block header %}
+<header class="d-flex flex-column align-items-center">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                
+              <a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'img/logo.jpg' %}" alt="logo" class='logo'></a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'getReservas' %}">Reserva Api</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'listaMesas' %}">Mesa Api</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Administrar Reservas
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <li><a class="dropdown-item" href="{% url 'registrarReserva' %}">Registrar Reservas</a></li>
+                      <li><a class="dropdown-item" href="{% url 'listadoReservas' %}">Lista de Reservas</a></li>
+                      <li><a class="dropdown-item" href="{% url 'registrarMesa' %}">Registrar Mesa</a></li>
+                      <li><a class="dropdown-item" href="{% url 'listadoMesas' %}">Listado de Mesas</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+    </div>
+
+</header>
+{% endblock  %}

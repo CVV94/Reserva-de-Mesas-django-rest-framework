@@ -1,0 +1,53 @@
+{% extends "index.html" %}
+
+{% block main %}
+    <div class="container">
+        {% if reservas %}
+            <table class="table" id="datatable-products">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Telefono</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Cantidad de Personas</th>
+                        <th>Estado</th>
+                        <th>Mesa</th>
+                        <th>Observacion</th>
+                        <th>Opciones</th>
+                    </tr>
+                    
+                </thead>
+                <tbody id="datatable-products">
+                    {% for r in reservas %}
+                    <tr>
+                        <td>{{r.id}}</td>
+                        <td>{{r.nombre_persona}}</td>
+                        <td>{{r.telefono}}</td>
+                        <td>{{r.fecha_reserva}}</td>
+                        <td>{{r.hora_reserva}}</td>
+                        <td>{{r.cantidad_personas}}</td>
+                        <td>{{r.estado}}</td>
+                        <td>{{r.mesa_asignada}}</td>
+                        <td>{{r.observacion}}</td>
+                        <td><a href="{% url 'modificarReserva' r.id %}" class='btn btn-success'><i class='bx bx-edit' style='color:#fdf6f6' ></i></a>
+                            <form style="display:inline;" method="POST" action="{% url 'eliminarReserva' r.id %}" onsubmit="return confirm('¿Estás seguro de que quieres eliminar la reserva con ID : '+{{r.id}}+ '?');">
+                                {% csrf_token %}
+                                <button type="submit" class='btn btn-danger'><i class='bx bxs-trash' style='color:#fdf6f6' ></i></button>
+                            </form>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+                <div class="alert alert-danger" role="alert">
+                No existen Reservas
+                </div>
+            {% endif %}
+    </div>
+{% endblock  %}
+
+{% block footer %}
+{% endblock  %}
